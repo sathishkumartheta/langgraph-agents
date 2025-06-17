@@ -1,11 +1,11 @@
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from langchain_core.messages import SystemMessage,HumanMessage
+import openai
 
 load_dotenv()
 
 model=ChatOpenAI(
-    model="gpt-3.5 turbo",
+    model="gpt-4o-mini",
     temperature=0.0
 )
 

@@ -9,8 +9,13 @@ from langchain_openai import ChatOpenAI
 
 from src import message_state
 from src import nodes
+import openai
 
+models = openai.models.list()
 
+# Print model IDs
+for model in models.data:
+    print(model.id)
 state=message_state.get_emailstate()
 
 #pprint(state)
@@ -53,15 +58,15 @@ legitimate_email = {
     "body": "Dear Mr. Hugg, I was referred to you by a colleague and I'm interested in learning more about your consulting services. Could we schedule a call next week? Best regards, John Smith"
 }
 
-# # Example spam email
-# spam_email = {
-#     "sender": "winner@lottery-intl.com",
-#     "subject": "YOU HAVE WON $5,000,000!!!",
-#     "body": "CONGRATULATIONS! You have been selected as the winner of our international lottery! To claim your $5,000,000 prize, please send us your bank details and a processing fee of $100."
-# }
+# Example spam email
+spam_email = {
+    "sender": "winner@lottery-intl.com",
+    "subject": "YOU HAVE WON $5,000,000!!!",
+    "body": "CONGRATULATIONS! You have been selected as the winner of our international lottery! To claim your $5,000,000 prize, please send us your bank details and a processing fee of $100."
+}
 
 # Process the legitimate email
-print("\nProcessing legitimate email...")
+print("\n Processing email...")
 legitimate_result = agent_graph.invoke({
     "email": legitimate_email,
     "is_spam": None,
