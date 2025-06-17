@@ -1,3 +1,5 @@
 langchain_openai
 langgraph
 grandalf
+python-dotenv
+
