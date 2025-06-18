@@ -68,7 +68,7 @@ spam_email = {
 # Process the legitimate email
 print("\n Processing email...")
 legitimate_result = agent_graph.invoke({
-    "email": legitimate_email,
+    "email": spam_email,
     "is_spam": None,
     "spam_reason": None,
     "email_category": None,

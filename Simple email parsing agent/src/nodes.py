@@ -2,7 +2,7 @@ from src.message_state import EmailState
 from typing import Dict
 from pprint import pprint
 from src.models import get_model
-from src.prompts import spam_detection_prompt
+from src.prompts import spam_detection_prompt, mail_composition_prompt
 from src.utils import extract_reason
 from langchain_core.messages import SystemMessage,HumanMessage
 
@@ -58,18 +58,50 @@ def classify_email(state:EmailState) -> Dict:
 
 
 def delete_email(state:EmailState)->Dict:
+    print('\n')
+    print('---------------Delete email--------------------')
+    print('the email is deleted')
+    print('-----------------------------------------------')
+    print('\n')
     pass
 
 def compose_email(state:EmailState)->Dict:
+    print('\n')
+    print('---------------compose email--------------------')
+    model=get_model()
+    messages=[
+        SystemMessage(content=mail_composition_prompt),
+        HumanMessage(content=str(state['email']))
+    ]
+    response=model.invoke(messages)
+    #pprint(response.content)
+    print('-----------------------------------------------')
+    print('\n')
+    return {
+        'email_draft' : str(response.content)
+    }
     pass
 
 def user_approval(state:EmailState)->Dict:
+    print('\n')
+    print('---------------user approval--------------------')
+    print('for your approval')
+    print(state['email_draft'])
+    print('-----------------------------------------------')
+    print('\n')
     pass
 
 def route_email(state:EmailState)->str:
+    print('\n')
+    print('--------------- inside route email -------------')
     spam=state['is_spam']
     if spam=="spam":
+        print('routing to spam')
+        print('--------------------------------------------')
         return "spam"
     else:
+        print('routing to legitimate')
+        print('--------------------------------------------')
+        print('\n')
         return "legitimate"
-    pass
+    
